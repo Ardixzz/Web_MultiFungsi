@@ -10,7 +10,7 @@ Saat ini, proyek ini berfokus pada pembangunan antarmuka pengguna yang solid dan
 
 ardixzzassistant saat ini menyertakan dan direncanakan untuk fitur-fitur berikut:
 
--   **Kerangka Alat Bantu:** Struktur navigasi dan halaman yang sudah siap untuk penambahan fitur seperti TikTok Downloader, Spotify Info, atau Image Quality Checker (IQC).
+-   **Kerangka Alat Bantu:** Struktur navigasi dan halaman yang sudah siap untuk penambahan fitur seperti TikTok Downloader, Spotify Info, atau (IQC).
 -   **Analitik (Contoh/Dummy):** Tampilan analitik sederhana menggunakan **Chart.js** untuk memvisualisasikan data (placeholder/data dummy).
 -   **Mode Gelap/Terang:** Antarmuka yang ramah mata dengan fitur *toggle* tema menggunakan variabel CSS.
 -   **Desain Responsif:** Dibangun dengan fokus pada pengalaman *desktop-first*.
@@ -37,7 +37,7 @@ Cukup butuh browser web modern (Chrome, Firefox, Edge, dll.).
 
 1.  **Kloning Repositori** (Jika Anda menggunakan Git):
     ```bash
-    git clone [URL_REPOSITORI_ANDA]
+    git clone [https://github.com/Ardixzz/Web_MultiFungsi.git]
     cd ardixzz
     ```
 2.  **Buka di Browser:** Buka file `index.html` langsung di browser web Anda.
