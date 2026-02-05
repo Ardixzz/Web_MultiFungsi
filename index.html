@@ -1,157 +1,387 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Ardixzz Assistant – TikTok Downloader, YouTube & Spotify Tools</title>
-
-    <meta name="description"
-        content="Ardixzz Assistant adalah website multi fungsi: TikTok Downloader tanpa watermark, YouTube Play, Transkrip & Peringkas YouTube, Cari & Unduh Spotify, serta iPhone Quote Generator.">
-
-    <meta name="keywords"
-        content="TikTok Downloader, YouTube Transkrip, YouTube Summary, Spotify Downloader, Tools Online Gratis">
-
-    <meta name="author" content="Ardixzz">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Ardixzz Assistant – Tools Online Multifungsi">
-    <meta property="og:description"
-        content="Download TikTok, Transkrip & Ringkas YouTube, Cari & Unduh Spotify gratis.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ardii.web.id">
-    <meta property="og:image"
-        content="https://i.pinimg.com/originals/03/12/3b/03123bf9e87298d0faefe70c5d626444.jpg">
-
-    <!-- Mobile SEO -->
-    <link rel="alternate" media="only screen and (max-width: 640px)" href="https://m.ardii.web.id">
-    <link rel="canonical" href="https://ardii.web.id">
-
     <link rel="icon" type="image/png"
         href="https://i.pinimg.com/originals/03/12/3b/03123bf9e87298d0faefe70c5d626444.jpg">
-
+    <title>Ardixzz Assistant</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <!-- Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Ardixzz Assistant",
-      "url": "https://ardii.web.id",
-      "description": "Website multi fungsi untuk TikTok Downloader, YouTube Tools, Spotify Tools, dan iPhone Quote Generator."
-    }
-    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-    <nav class="sidenav">
-        <h3>Ardixzz Assistant</h3>
-        <a onclick="openPage('home')">Home</a>
-        <a onclick="openPage('tiktok')">TikTok Downloader</a>
-        <a onclick="openPage('yt-transcript')">Transkrip YouTube</a>
-        <a onclick="openPage('yt-summary')">Peringkas YouTube</a>
-        <a onclick="openPage('spotify')">Spotify Downloader</a>
-        <a onclick="openPage('iphone')">iPhone Quote</a>
+    <div id="desktop-warning">
+        <div class="warning-content">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <h1>Mode Desktop Diperlukan</h1>
+            <p>Untuk pengalaman terbaik, silakan buka website ini di layar yang lebih besar (Desktop/Laptop) atau
+                aktifkan "Situs Desktop" di browser HP Anda.</p>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+    <button id="theme-toggle"><i class="bi bi-brightness-high-fill"></i><i class="bi bi-moon-stars-fill"></i></button>
+    <button id="menu-toggle"><i class="bi bi-list"></i></button>
+
+    <nav class="sidenav" id="sidenav">
+        <div class="sidenav-header">
+            <h3>Ardixzz Assistant</h3>
+        </div>
+        <a href="#" class="nav-link" data-target="page-welcome"><i class="bi bi-house-door-fill"></i> Selamat Datang</a>
+        <a href="#" class="nav-link" data-target="page-menu"><i class="bi bi-grid-fill"></i> Menu Fitur</a>
+        <a href="#" class="nav-link" data-target="page-analytics"><i class="bi bi-bar-chart-line-fill"></i> Analitik</a>
+        <hr>
+        <a href="#" class="nav-link" data-target="page-tiktok"><i class="bi bi-tiktok"></i> TikTok Downloader</a>
+        <a href="#" class="nav-link" data-target="page-yt-play"><i class="bi bi-youtube"></i> YouTube Play</a>
+        <a href="#" class="nav-link" data-target="page-yt-transcript"><i class="bi bi-file-text-fill"></i> Transkrip
+            YouTube</a>
+        <a href="#" class="nav-link" data-target="page-yt-summary"><i class="bi bi-card-checklist"></i> Peringkas
+            YouTube</a>
+        <a href="#" class="nav-link" data-target="page-spotify-search"><i class="bi bi-spotify"></i> Cari Spotify</a>
+        <a href="#" class="nav-link" data-target="page-spotify-download"><i class="bi bi-download"></i> Unduh
+            Spotify</a>
+        <a href="#" class="nav-link" data-target="page-iphone-quote"><i class="bi bi-phone-fill"></i> iPhone Quote</a>
     </nav>
+    <div class="overlay" id="overlay"></div>
+    <div class="cursor-light"></div>
+
+    <div class="ocean">
+        <svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none"
+            shape-rendering="auto">
+            <defs>
+                <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="wave-container">
+                <use xlink:href="#wave-path" x="48" y="0" fill="var(--wave-color)" opacity="0.5" />
+                <use xlink:href="#wave-path" x="48" y="3" fill="var(--wave-color)" opacity="0.7" />
+                <use xlink:href="#wave-path" x="48" y="5" fill="var(--wave-color)" />
+            </g>
+        </svg>
+    </div>
 
     <main>
 
-        <!-- HOME -->
-        <section id="home" class="page active">
-            <h1>Ardixzz Assistant – Website Multi Fungsi</h1>
-            <p>Tools online gratis untuk TikTok, YouTube, Spotify, dan utilitas digital lainnya.</p>
+        <section class="page active" id="page-welcome">
+            <div class="content">
+                <h1>Selamat Datang Cuy</h1>
+                <button class="btn" id="btn-mulai">Mulai</button>
+                <div class="device-info-grid">
+                    <div class="info-box" id="info-time-box"><i class="bi bi-clock-history"></i><strong>Waktu &
+                            Tanggal</strong><span id="info-time">Memuat...</span></div>
+                    <div class="info-box" id="info-device-box"><i
+                            class="bi bi-display"></i><strong>Perangkat</strong><span id="info-device">Memuat...</span>
+                    </div>
+                    <div class="info-box" id="info-battery-box"><i
+                            class="bi bi-battery-half"></i><strong>Baterai</strong><span
+                            id="info-battery">Memuat...</span></div>
+                    <div class="info-box" id="info-ip-box"><i class="bi bi-broadcast-pin"></i><strong>Alamat
+                            IP</strong><span id="info-ip">Memuat...</span></div>
+                    <div class="info-box" id="info-location-box"><i
+                            class="bi bi-geo-alt"></i><strong>Lokasi</strong><span id="info-location">Memuat...</span>
+                    </div>
+                    <div class="info-box" id="info-network-box"><i class="bi bi-wifi"></i><strong>Koneksi</strong><span
+                            id="info-network">Memuat...</span></div>
+                </div>
+            </div>
         </section>
 
-        <!-- TIKTOK -->
-        <section id="tiktok" class="page">
-            <h2>TikTok Downloader</h2>
-            <p>Download video TikTok tanpa watermark gratis.</p>
-            <input type="text" placeholder="Tempel link TikTok">
-            <button>Unduh</button>
+        <section class="page" id="page-menu">
+            <div class="content">
+                <button class="btn-back" data-target="page-welcome"><i class="bi bi-arrow-left-circle"></i>
+                       ... Kembali</button>
+                <h2>Menu Fitur</h2>
+                <div class="menu-list">
+                    <div class="menu-item">
+                        <div class="menu-header"><i class="bi bi-tiktok"></i>
+                            <h3>TikTok Downloader</h3><button class="btn-coba" data-target="page-tiktok">Coba</button>
+                        </div>
+                        <p class="menu-description">Unduh video TikTok tanpa watermark.</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-header"><i class="bi bi-youtube"></i>
+                            <h3>YouTube Play</h3><button class="btn-coba" data-target="page-yt-play">Coba</button>
+                        </div>
+                        <p class="menu-description">Cari & unduh lagu/video YouTube.</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-header"><i class="bi bi-file-text-fill"></i>
+                            <h3>Transkrip YouTube</h3><button class="btn-coba"
+                                data-target="page-yt-transcript">Coba</button>
+                        </div>
+                        <p class="menu-description">Ambil teks transkrip dari video YouTube.</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-header"><i class="bi bi-card-checklist"></i>
+                            <h3>Peringkas YouTube</h3><button class="btn-coba"
+                                data-target="page-yt-summary">Coba</button>
+                        </div>
+                        <p class="menu-description">Buat ringkasan video YouTube.</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-header"><i class="bi bi-spotify"></i>
+                            <h3>Cari Spotify</h3><button class="btn-coba"
+                                data-target="page-spotify-search">Coba</button>
+                        </div>
+                        <p class="menu-description">Cari informasi lagu di Spotify.</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-header"><i class="bi bi-download"></i>
+                            <h3>Unduh Spotify</h3><button class="btn-coba"
+                                data-target="page-spotify-download">Coba</button>
+                        </div>
+                        <p class="menu-description">Unduh lagu dari link Spotify.</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-header"><i class="bi bi-phone-fill"></i>
+                            <h3>iPhone Quote</h3><button class="btn-coba" data-target="page-iphone-quote">Coba</button>
+                        </div>
+                        <p class="menu-description">Buat gambar chat palsu ala iPhone.</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <!-- YT TRANSCRIPT -->
-        <section id="yt-transcript" class="page">
-            <h2>Transkrip YouTube</h2>
-            <p>Ambil teks transkrip dari video YouTube.</p>
-            <input type="text" placeholder="Tempel link YouTube">
-            <button>Ambil</button>
+        <section class="page" id="page-tiktok">
+            <div class="content">
+                <button class="btn-back" data-target="page-menu"><i class="bi bi-arrow-left-circle"></i> Kembali ke
+                    Menu</button>
+                <h2><i class="bi bi-tiktok"></i> TikTok Downloader</h2>
+                <div class="feature-container">
+                    <button class="btn-petunjuk" id="btn-petunjuk-tiktok"><i class="bi bi-question-circle"></i>
+                        Petunjuk</button>
+                    <div class="modal-petunjuk" id="modal-petunjuk-tiktok">
+                        <p><strong>Cara Penggunaan:</strong></p>
+                        <ol>
+                            <li>Buka aplikasi TikTok dan salin link video.</li>
+                            <li>Tempel (paste) link tersebut di kotak di bawah ini.</li>
+                            <li>Klik tombol "Unduh".</li>
+                        </ol><button class="btn-tutup-petunjuk" data-target="modal-petunjuk-tiktok">Mengerti</button>
+                    </div>
+                    <div class="input-grup">
+                        <input type="text" id="tiktok-url" placeholder="Tempel link TikTok di sini..."><button
+                            class="btn" id="btn-download-tiktok">Unduh</button>
+                    </div>
+                    <div id="loading-spinner-tiktok" class="loading-spinner" style="display: none;">
+                        <div class="spinner"></div><span>Memproses...</span>
+                    </div>
+                    <div id="tiktok-results" class="results-container"></div>
+                </div>
+            </div>
         </section>
 
-        <!-- YT SUMMARY -->
-        <section id="yt-summary" class="page">
-            <h2>Peringkas YouTube</h2>
-            <p>Ringkas video YouTube secara otomatis.</p>
-            <input type="text" placeholder="Tempel link YouTube">
-            <button>Ringkas</button>
+        <section class="page" id="page-yt-play">
+            <div class="content">
+                <button class="btn-back" data-target="page-menu"><i class="bi bi-arrow-left-circle"></i> Kembali ke
+                    Menu</button>
+                <h2><i class="bi bi-youtube"></i> YouTube Play</h2>
+                <div class="feature-container">
+                    <button class="btn-petunjuk" id="btn-petunjuk-yt-play"><i class="bi bi-question-circle"></i>
+                        Petunjuk</button>
+                    <div class="modal-petunjuk" id="modal-petunjuk-yt-play">
+                        <p><strong>Cara Penggunaan:</strong></p>
+                        <ol>
+                            <li>Ketik judul lagu atau video (contoh: "Laskar Pelangi").</li>
+                            <li>Klik tombol "Cari".</li>
+                            <li><b>Peringatan:</b> Fitur ini mungkin gagal karena batasan API (CORS).</li>
+                        </ol><button class="btn-tutup-petunjuk" data-target="modal-petunjuk-yt-play">Mengerti</button>
+                    </div>
+                    <div class="input-grup">
+                        <input type="text" id="yt-play-query" placeholder="Ketik judul lagu atau video..."><button
+                            class="btn" id="btn-search-yt-play">Cari</button>
+                    </div>
+                    <div id="loading-spinner-yt-play" class="loading-spinner" style="display: none;">
+                        <div class="spinner"></div><span>Mencari video...</span>
+                    </div>
+                    <div id="yt-play-results" class="results-container"></div>
+                </div>
+            </div>
         </section>
 
-        <!-- SPOTIFY -->
-        <section id="spotify" class="page">
-            <h2>Spotify Downloader</h2>
-            <p>Unduh lagu dari Spotify.</p>
-            <input type="text" placeholder="Tempel link Spotify">
-            <button>Unduh</button>
+        <section class="page" id="page-yt-transcript">
+            <div class="content">
+                <button class="btn-back" data-target="page-menu"><i class="bi bi-arrow-left-circle"></i> Kembali ke
+                    Menu</button>
+                <h2><i class="bi bi-file-text-fill"></i> Transkrip YouTube</h2>
+                <div class="feature-container">
+                    <button class="btn-petunjuk" id="btn-petunjuk-yt-transcript"><i class="bi bi-question-circle"></i>
+                        Petunjuk</button>
+                    <div class="modal-petunjuk" id="modal-petunjuk-yt-transcript">
+                        <p><strong>Cara Penggunaan:</strong></p>
+                        <ol>
+                            <li>Salin link video YouTube yang ingin kamu ambil transkripnya.</li>
+                            <li>Tempel link tersebut di kotak di bawah ini.</li>
+                            <li><b>Peringatan:</b> Fitur ini mungkin gagal karena batasan API (CORS).</li>
+                        </ol><button class="btn-tutup-petunjuk"
+                            data-target="modal-petunjuk-yt-transcript">Mengerti</button>
+                    </div>
+                    <div class="input-grup">
+                        <input type="text" id="yt-transcript-url" placeholder="Tempel link YouTube di sini..."><button
+                            class="btn" id="btn-get-yt-transcript">Ambil</button>
+                    </div>
+                    <div id="loading-spinner-yt-transcript" class="loading-spinner" style="display: none;">
+                        <div class="spinner"></div><span>Mengambil transkrip...</span>
+                    </div>
+                    <div id="yt-transcript-results" class="results-container"></div>
+                </div>
+            </div>
         </section>
 
-        <!-- IPHONE QUOTE -->
-        <section id="iphone" class="page">
-            <h2>iPhone Quote Generator</h2>
-            <p>Buat tampilan chat ala iPhone.</p>
-            <input type="text" placeholder="Pesan">
-            <button>Buat</button>
+        <section class="page" id="page-yt-summary">
+            <div class="content">
+                <button class="btn-back" data-target="page-menu"><i class="bi bi-arrow-left-circle"></i> Kembali ke
+                    Menu</button>
+                <h2><i class="bi bi-card-checklist"></i> Peringkas YouTube</h2>
+                <div class="feature-container">
+                    <button class="btn-petunjuk" id="btn-petunjuk-yt-summary"><i class="bi bi-question-circle"></i>
+                        Petunjuk</button>
+                    <div class="modal-petunjuk" id="modal-petunjuk-yt-summary">
+                        <p><strong>Cara Penggunaan:</strong></p>
+                        <ol>
+                            <li>Salin link video YouTube yang ingin kamu ringkas.</li>
+                            <li>Tempel link tersebut di kotak di bawah ini.</li>
+                            <li><b>Peringatan:</b> Fitur ini mungkin gagal karena batasan API (CORS).</li>
+                        </ol><button class="btn-tutup-petunjuk"
+                            data-target="modal-petunjuk-yt-summary">Mengerti</button>
+                    </div>
+                    <div class="input-grup">
+                        <input type="text" id="yt-summary-url" placeholder="Tempel link YouTube di sini..."><button
+                            class="btn" id="btn-get-yt-summary">Ringkas</button>
+                    </div>
+                    <div id="loading-spinner-yt-summary" class="loading-spinner" style="display: none;">
+                        <div class="spinner"></div><span>Membuat ringkasan...</span>
+                    </div>
+                    <div id="yt-summary-results" class="results-container"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page" id="page-spotify-search">
+            <div class="content">
+                <button class="btn-back" data-target="page-menu"><i class="bi bi-arrow-left-circle"></i> Kembali ke
+                    Menu</button>
+                <h2><i class="bi bi-spotify"></i> Cari Spotify</h2>
+                <div class="feature-container">
+                    <button class="btn-petunjuk" id="btn-petunjuk-spotify-search"><i class="bi bi-question-circle"></i>
+                        Petunjuk</button>
+                    <div class="modal-petunjuk" id="modal-petunjuk-spotify-search">
+                        <p><strong>Cara Penggunaan:</strong></p>
+                        <ol>
+                            <li>Ketik judul lagu atau artis (contoh: "Serana").</li>
+                            <li>Klik tombol "Cari".</li>
+                        </ol><button class="btn-tutup-petunjuk"
+                            data-target="modal-petunjuk-spotify-search">Mengerti</button>
+                    </div>
+                    <div class="input-grup">
+                        <input type="text" id="spotify-search-query"
+                            placeholder="Ketik judul lagu atau artis..."><button class="btn"
+                            id="btn-search-spotify">Cari</button>
+                    </div>
+                    <div id="loading-spinner-spotify-search" class="loading-spinner" style="display: none;">
+                        <div class="spinner"></div><span>Mencari di Spotify...</span>
+                    </div>
+                    <div id="spotify-search-results" class="results-container"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page" id="page-spotify-download">
+            <div class="content">
+                <button class="btn-back" data-target="page-menu"><i class="bi bi-arrow-left-circle"></i> Kembali ke
+                    Menu</button>
+                <h2><i class="bi bi-download"></i> Unduh Spotify</h2>
+                <div class="feature-container">
+                    <button class="btn-petunjuk" id="btn-petunjuk-spotify-download"><i
+                            class="bi bi-question-circle"></i> Petunjuk</button>
+                    <div class="modal-petunjuk" id="modal-petunjuk-spotify-download">
+                        <p><strong>Cara Penggunaan:</strong></p>
+                        <ol>
+                            <li>Buka Spotify dan salin link lagu.</li>
+                            <li>Tempel link tersebut di kotak di bawah ini.</li>
+                            <li>Klik tombol "Unduh".</li>
+                        </ol><button class="btn-tutup-petunjuk"
+                            data-target="modal-petunjuk-spotify-download">Mengerti</button>
+                    </div>
+                    <div class="input-grup">
+                        <input type="text" id="spotify-download-url"
+                            placeholder="Tempel link Spotify di sini..."><button class="btn"
+                            id="btn-download-spotify">Unduh</button>
+                    </div>
+                    <div id="loading-spinner-spotify-download" class="loading-spinner" style="display: none;">
+                        <div class="spinner"></div><span>Memproses link...</span>
+                    </div>
+                    <div id="spotify-download-results" class="results-container"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page" id="page-iphone-quote">
+            <div class="content">
+                <button class="btn-back" data-target="page-menu"><i class="bi bi-arrow-left-circle"></i> Kembali ke
+                    Menu</button>
+                <h2><i class="bi bi-phone-fill"></i> iPhone Quote</h2>
+                <div class="feature-container">
+                    <button class="btn-petunjuk" id="btn-petunjuk-iphone-quote"><i class="bi bi-question-circle"></i>
+                        Petunjuk</button>
+                    <div class="modal-petunjuk" id="modal-petunjuk-iphone-quote">
+                        <p><strong>Cara Penggunaan:</strong></p>
+                        <ol>
+                            <li>Masukkan teks pesan (prompt).</li>
+                            <li>Masukkan jam (contoh: 19:23).</li>
+                            <li>Masukkan persentase baterai (contoh: 15).</li>
+                            <li>Klik tombol "Buat Quote".</li>
+                        </ol><button class="btn-tutup-petunjuk"
+                            data-target="modal-petunjuk-iphone-quote">Mengerti</button>
+                    </div>
+                    <div class="input-grup">
+                        <input type="text" id="iqc-prompt" placeholder="Ketik pesan (prompt)...">
+                    </div>
+                    <div class="input-grid-col-2">
+                        <label>Jam: <input type="text" id="iqc-jam" value="19:23"></label>
+                        <label>Baterai (%): <input type="number" id="iqc-batre" value="15" min="0" max="100"></label>
+                    </div>
+                    <button class="btn" id="btn-generate-iqc">Buat Quote</button>
+                    <div id="loading-spinner-iqc" class="loading-spinner" style="display: none;">
+                        <div class="spinner"></div><span>Membuat quote...</span>
+                    </div>
+                    <div id="iqc-results" class="results-container image-result-box"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page" id="page-analytics">
+            <div class="content">
+                <button class="btn-back" data-target="page-menu"><i class="bi bi-arrow-left-circle"></i> Kembali ke
+                    Menu</button>
+                <h2><i class="bi bi-bar-chart-line-fill"></i> Analitik</h2>
+                <div class="analytics-container">
+                    <div class="chart-box">
+                        <div class="chart-header">
+                            <h3>Pengunjung Harian (7 Hari Terakhir)</h3>
+                            <p>Total: <strong>1,234</strong> <span class="trend-up"><i class="bi bi-arrow-up-right"></i>
+                                    +5.2%</span></p>
+                        </div><canvas id="visitors-chart"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <div class="chart-header">
+                            <h3>Penggunaan Fitur (Bulan Ini)</h3>
+                            <p>Fitur terpopuler: <strong>TikTok Downloader</strong></p>
+                        </div><canvas id="features-chart"></canvas>
+                    </div>
+                </div>
+            </div>
         </section>
 
     </main>
 
     <footer>
-        © 2024–2050 Ardixzz Assistant
+        copyright 2024-2050 Ardixzz + Gemini 
     </footer>
 
-    <!-- SEO SPA CONTROLLER -->
-    <script>
-        const seoMap = {
-            home: {
-                title: "Ardixzz Assistant – Website Multi Fungsi",
-                desc: "Website multi fungsi untuk TikTok Downloader, YouTube Tools, Spotify Tools, dan iPhone Quote."
-            },
-            tiktok: {
-                title: "TikTok Downloader – Ardixzz Assistant",
-                desc: "Download video TikTok tanpa watermark gratis dan cepat."
-            },
-            "yt-transcript": {
-                title: "Transkrip YouTube – Ardixzz Assistant",
-                desc: "Ambil teks transkrip dari video YouTube dengan mudah."
-            },
-            "yt-summary": {
-                title: "Peringkas YouTube – Ardixzz Assistant",
-                desc: "Ringkas video YouTube secara otomatis dan cepat."
-            },
-            spotify: {
-                title: "Spotify Downloader – Ardixzz Assistant",
-                desc: "Unduh lagu dari Spotify dengan mudah."
-            },
-            iphone: {
-                title: "iPhone Quote Generator – Ardixzz Assistant",
-                desc: "Buat tampilan chat palsu ala iPhone."
-            }
-        };
-
-        function openPage(id) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-
-            if (seoMap[id]) {
-                document.title = seoMap[id].title;
-                document.querySelector('meta[name="description"]').setAttribute("content", seoMap[id].desc);
-                history.pushState({}, "", "#" + id);
-            }
-        }
-    </script>
-
+    <script src="script.js"></script>
 </body>
+
 </html>
